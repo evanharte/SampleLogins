@@ -1,4 +1,4 @@
-const dal = require("./auth_db");
+const dal = require("./pg.auth_db");
 
 var getLogins = function () {
   if (DEBUG) console.log("logins.pg.dal.getLogins()");
