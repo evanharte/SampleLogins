@@ -3,7 +3,7 @@ const dal = require("./pg.auth_db");
 var getLogins = function () {
   if (DEBUG) console.log("logins.pg.dal.getLogins()");
   return new Promise(function (resolve, reject) {
-    const sql = `SELECT id, username, password FROM public."Logins" \ 
+    const sql = `SELECT id AS _id, username, password FROM public."Logins" \ 
     ORDER BY id DESC LIMIT 7;`;
     dal.query(sql, [], (err, result) => {
       if (err) {
@@ -19,7 +19,7 @@ var getLogins = function () {
 var getLoginByLoginId = function (id) {
   if (DEBUG) console.log("logins.pg.dal.getLoginByLoginId()");
   return new Promise(function (resolve, reject) {
-    const sql = `SELECT id, username, password FROM public."Logins" \ 
+    const sql = `SELECT id AS _id, username, password FROM public."Logins" \ 
     WHERE id = $1;`;
     dal.query(sql, [id], (err, result) => {
       if (err) {
