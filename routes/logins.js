@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const uuid = require("uuid");
 const loginsDal = require("../services/pg.logins.dal");
 // const loginsDal = require("../services/m.logins.dal");
 
@@ -36,6 +37,8 @@ router.get("/:id/edit", async (req, res) => {
   if (DEBUG) console.log("login.Edit : " + req.params.id);
   res.render("loginPatch.ejs", {
     username: req.query.username,
+    password: req.query.password,
+    email: req.query.email,
     theId: req.params.id,
   });
 });
@@ -51,7 +54,12 @@ router.get("/:id/delete", async (req, res) => {
 router.post("/", async (req, res) => {
   if (DEBUG) console.log("logins.POST");
   try {
-    await loginsDal.addLogin(req.body.username, req.body.password);
+    await loginsDal.addLogin(
+      req.body.username,
+      req.body.password,
+      req.body.email,
+      uuid.v4()
+    );
     res.redirect("/logins/");
   } catch (err) {
     // if (DEBUG) console.log(err);
@@ -65,7 +73,8 @@ router.patch("/:id", async (req, res) => {
     await loginsDal.patchLogin(
       req.params.id,
       req.body.username,
-      req.body.password
+      req.body.password,
+      req.body.email
     );
     res.redirect("/logins/");
   } catch {
