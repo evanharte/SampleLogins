@@ -7,4 +7,6 @@ const atlas =
 // const pool = new MongoClient(uri);
 const pool = new MongoClient(atlas);
 
+if (DEBUG) console.log("connected to MongoDB...");
+
 module.exports = pool;

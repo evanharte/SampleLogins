@@ -7,4 +7,6 @@ const pool = new Pool({
   port: 5432,
 });
 
+if (DEBUG) console.log("connected to PostgreSQL...");
+
 module.exports = pool;
