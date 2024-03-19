@@ -36,7 +36,7 @@ var addLogin = function (username, password, email, uuid) {
   if (DEBUG) console.log("logins.pg.dal.addLogin()");
   return new Promise(function (resolve, reject) {
     const sql = `INSERT INTO public."Logins"(username, password, email, uuid) \
-    VALUES ($1, $2, $3, $4)`;
+    VALUES ($1, $2, $3, $4) RETURNING id;`;
     // the $1 and $2 are placeholders for the username and password in next line.
     dal.query(sql, [username, password, email, uuid], (err, result) => {
       if (err) {
