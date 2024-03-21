@@ -7,11 +7,6 @@ const bcrypt = require("bcrypt");
 const loginsDal = require("../services/m.logins.dal");
 
 router.get("/", async (req, res) => {
-  // const theLogins = [
-  //   { id: 1, username: "example", password: "example" },
-  //   { id: 4, username: "frodob", password: "example" },
-  //   { id: 7, username: "bilbob", password: "example" },
-  // ];
   try {
     let theLogins = await loginsDal.getLogins();
     if (DEBUG) console.table(theLogins);
